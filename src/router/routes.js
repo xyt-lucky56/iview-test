@@ -24,6 +24,10 @@ export const routesList = [
             name: 'formList',
             component: resolve => require(["@/views/v-form/formList"], resolve),
         }, {
+            path: '/admin/formListTwo',
+            name: 'formList',
+            component: resolve => require(["@/views/v-form/formListTwo"], resolve),
+        },{
             path: '/admin/table',
             name: 'table',
             component: resolve => require(["@/views/v-table/table"], resolve),
