@@ -1,119 +1,126 @@
-
 <template>
-<div class="view-main">
-   <i-form :model="formItem" :label-width="80" :rules="ruleValidate">
-        <Form-item label="输入框" prop="input">
-            <i-input :value.sync="formItem.input" placeholder="请输入"></i-input>
-        </Form-item>
-        <Form-item label="选择器" prop="select">
-            <i-select :model.sync="formItem.select" placeholder="请选择">
-                <i-option value="beijing">北京市</i-option>
-                <i-option value="shanghai">上海市</i-option>
-                <i-option value="shenzhen">深圳市</i-option>
-            </i-select>
-        </Form-item>
-        <Form-item label="日期控件">
+<div class="iview-main">
+    <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
+        <FormItem label="姓名" prop="name">
+            <Input v-model="formValidate.name" placeholder="请输入姓名"></Input>
+        </FormItem>
+        <FormItem label="邮箱" prop="mail">
+            <Input v-model="formValidate.mail" placeholder="请输入邮箱"></Input>
+        </FormItem>
+        <FormItem label="C城市" prop="city">
+            <Select v-model="formValidate.city" placeholder="请选择城市">
+                <Option value="beijing">湖北</Option>
+                <Option value="shanghai">湖南</Option>
+                <Option value="shenzhen">广州</Option>
+            </Select>
+        </FormItem>
+        <FormItem label="Date">
             <Row>
-                <i-col span="11">
-                    <Date-picker type="date" placeholder="选择日期" :value.sync="formItem.date"></Date-picker>
-                </i-col>
-                <i-col span="2" style="text-align: center">-</i-col>
-                <i-col span="11">
-                    <Time-picker type="time" placeholder="选择时间" :value.sync="formItem.time"></Time-picker>
-                </i-col>
+                <Col span="11">
+                    <FormItem prop="date">
+                        <DatePicker type="date" placeholder="请选择开始时间" v-model="formValidate.date"></DatePicker>
+                    </FormItem>
+                </Col>
+                <Col span="2" style="text-align: center">-</Col>
+                <Col span="11">
+                    <FormItem prop="time">
+                        <TimePicker type="time" placeholder="请选择结束时间" v-model="formValidate.time"></TimePicker>
+                    </FormItem>
+                </Col>
             </Row>
-        </Form-item>
-        <Form-item label="单选框">
-            <Radio-group :model.sync="formItem.radio">
-                <Radio value="male">男</Radio>
-                <Radio value="female">女</Radio>
-            </Radio-group>
-        </Form-item>
-        <Form-item label="多选框">
-            <Checkbox-group :model.sync="formItem.checkbox">
-                <Checkbox value="吃饭">1</Checkbox>
-                <Checkbox value="睡觉">2</Checkbox>
-                <Checkbox value="跑步">3</Checkbox>
-                <Checkbox value="看电影">4</Checkbox>
-            </Checkbox-group>
-        </Form-item>
-        <Form-item label="开关">
-            <Switch :checked.sync="formItem.switch" size="large">
-                <span slot="open">开启</span>
-                <span slot="close">关闭</span>
-            </Switch>
-        </Form-item>
-        <Form-item label="滑块">
-            <Slider :value.sync="formItem.slider" range></Slider>
-        </Form-item>
-        <Form-item label="文本域">
-            <i-input :value.sync="formItem.textarea" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入..."></i-input>
-        </Form-item>
-        <Form-item>
-            <i-button type="primary">提交</i-button>
-            <i-button  style="margin-left: 8px">取消</i-button>
-        </Form-item>
-    </i-form>
+        </FormItem>
+        <FormItem label="性别" prop="gender">
+            <RadioGroup v-model="formValidate.gender">
+                <Radio label="male">男</Radio>
+                <Radio label="female">女</Radio>
+            </RadioGroup>
+        </FormItem>
+        <FormItem label="爱好" prop="interest">
+            <CheckboxGroup v-model="formValidate.interest">
+                <Checkbox label="吃"></Checkbox>
+                <Checkbox label="睡觉"></Checkbox>
+                <Checkbox label="跑步"></Checkbox>
+                <Checkbox label="电影"></Checkbox>
+            </CheckboxGroup>
+        </FormItem>
+        <FormItem label="描述" prop="desc">
+            <Input v-model="formValidate.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请描述..."></Input>
+        </FormItem>
+        <FormItem>
+            <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
+            <Button @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
+        </FormItem>
+    </Form>
 </div>
+   
 </template>
 <script>
 export default {
-  props: {
-
-  },
   data() {
     return {
-      formItem: {
-        input: '',
-        select: '',
-        radio: 'male',
-        checkbox: [],
-        switch: true,
+      formValidate: {
+        name: '',
+        mail: '',
+        city: '',
+        gender: '',
+        interest: [],
         date: '',
         time: '',
-        slider: [20, 50],
-        textarea: '',
-        ruleValidate: {
-          name: [
-            { required: true, message: '姓名不能为空', trigger: 'blur' }
-          ],
-          mail: [
-            { required: true, message: '邮箱不能为空', trigger: 'blur' },
-            { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
-          ],
-          city: [
-            { required: true, message: '请选择城市', trigger: 'change' }
-          ],
-          gender: [
-            { required: true, message: '请选择性别', trigger: 'change' }
-          ],
-          interest: [
-            { required: true, type: 'array', min: 1, message: '至少选择一个爱好', trigger: 'change' },
-            { type: 'array', max: 2, message: '最多选择两个爱好', trigger: 'change' }
-          ],
-          date: [
-            { required: true, type: 'date', message: '请选择日期', trigger: 'change' }
-          ],
-          time: [
-            { required: true, type: 'date', message: '请选择时间', trigger: 'change' }
-          ],
-          desc: [
-            { required: true, message: '请输入个人介绍', trigger: 'blur' },
-            { type: 'string', min: 20, message: '介绍不能少于20字', trigger: 'blur' }
-          ]
-        }
+        desc: ''
+      },
+      ruleValidate: {
+        name: [
+          { required: true, message: '请输入姓名', trigger: 'blur' }
+        ],
+        mail: [
+          { required: true, message: '请输入邮箱', trigger: 'blur' },
+          { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
+        ],
+        city: [
+          { required: true, message: '请选择城市', trigger: 'change' }
+        ],
+        gender: [
+          { required: true, message: '请选择性别', trigger: 'change' }
+        ],
+        interest: [
+          { required: true, type: 'array', min: 1, message: '至少选择一个爱好', trigger: 'change' },
+          { type: 'array', max: 2, message: '最多选择两个爱好', trigger: 'change' }
+        ],
+        date: [
+          { required: true, type: 'date', message: '请选择开始日期', trigger: 'change' }
+        ],
+        time: [
+          { required: true, type: 'string', message: '请选择时间', trigger: 'change' }
+        ],
+        desc: [
+          { required: true, message: '请描述你的印象', trigger: 'blur' },
+          { type: 'string', min: 20, message: '不少于20个字', trigger: 'blur' }
+        ]
       }
-    };
+    }
   },
-  created() {
-
-  },
-};
+  methods: {
+    // 表单提交
+    handleSubmit(name) {
+      this.$refs[name].validate((valid) => {
+        if (valid) {
+          this.$Message.success('恭喜您，提交成功!');
+        } else {
+          this.$Message.error('不好意思，失败了!');
+        }
+      })
+    },
+    // 表单重置
+    handleReset(name) {
+      this.$refs[name].resetFields();
+    }
+  }
+}
 </script>
-
 <style scoped lang="less">
-.view-main {
+.iview-main {
   width: 50%;
   margin: 0 auto;
+  margin-top:50px;
 }
 </style>

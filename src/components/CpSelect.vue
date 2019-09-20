@@ -1,63 +1,40 @@
 <template>
-    <div>
-        <i-select v-model="model1" size="small" style="width:100px" filterable @on-change='HanderSelectprovince'>
-            <i-option v-for="item in cityList1" :label="item.label" :key="item.value" :value='item.value'>{{ item.text }}</i-option>
-        </i-select>    
-        <i-select  v-model="model2" size="small" style="width:100px" filterable @on-change='HanderSelectCity'>
-            <i-option v-for="item in cityList2" :label="item.label" :key="item.value" :value='item.value'>{{ item.text }}</i-option>
-        </i-select>    
-        <i-select  v-model="model3" size="small" style="width:100px" filterable @on-change='HanderSelectArea'>
-            <i-option v-for="item in cityList3" :label="item.label" :key="item.value" :value='item.value'>{{ item.text }}</i-option>
-        </i-select>    
-        <i-select  v-model="model4" size="small" style="width:100px" filterable @on-change='HanderSelectStreet'>
-            <i-option v-for="item in cityList4" :label="item.label" :key="item.value" :value='item.value'>{{ item.text }}</i-option>
-        </i-select>
+    <div class="iview-main">
+       <Row>
+        <Col span="12" style="padding-right:10px">
+            <Select v-model="selectData" filterable @on-change="changeSelect">
+                <Option v-for="item in dataList"  :value="item.value" :key="item.value">{{ item.label }}</Option>
+            </Select>
+        </Col>
+       </Row>
     </div>
 </template>
 
 
 <script>
-  import {chinaList} from '@/utils/city.js'
-  export default {
-      data(){
-          return {
-              model1:'',
-              model2:'',
-              model3:'',
-              model4:'',
-              cityList1:[],
-              cityList2:[],
-              cityList3:[],
-              cityList4:[],
-          }
-      },
-      created(){
-          this.cityList1=chinaList;
-          console.log(chinaList)
-      },
-      methods:{
-          HanderSelectprovince(va){
-              console.log(va)
-              chinaList.forEach((item,index)=>{
-                  if(item.value===va){
-                      this.cityList2=item.childrens
-                  }
-              });
-              this.model2='';
-              this.$emit('listenToChildEvent',this.model1)
-          },
-          HanderSelectCity(){
+export default {
+  props: ['value', 'dataList', 'isRemember'],
+  data() {
+    return {
+      selectData: '',
+    }
+  },
+  created() {
 
-          },
-          HanderSelectArea(){
-
-          },
-          HanderSelectStreet(){
-
-          }
-      }
+  },
+  methods: {
+    changeSelect() {
+      console.log(this.selectData)
+      this.$emit('input', value);
+    }
   }
+};
 </script>
 
-<style>
+<style scoped>
+.iview-main {
+  margin: 0 auto;
+  margin-top: 100px;
+  text-align: center;
+}
 </style>
