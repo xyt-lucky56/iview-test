@@ -1,5 +1,5 @@
 <template>
-  <Select v-model="selectData" filterable @on-change="changeSelect">
+  <Select v-model="selectData" filterable @on-change="changeSelect" :placeholder="placeholder">
     <Option v-for="item in dataList" :value="item.value" :key="item.value">{{ item.label }}</Option>
   </Select>
 </template>
@@ -7,13 +7,15 @@
 
 <script>
   export default {
-    props: ['value', 'dataList', 'isRemember', 'selectName'],
+    props: ['value', 'dataList', 'isRemember', 'selectName','placeholder'],
     data() {
       return {
         selectData: '',
       }
     },
-    created() {},
+    created() {
+
+    },
     methods: {
       //切换下拉框
       changeSelect() {
@@ -29,14 +31,13 @@
           for (let a = 0; a < data.length; a++) {
             if (data[a].defaultSelect) {
               this.selectData = data[a].value
-              this.$emit('input', this.selectData);
             }
           }
           //如果有存储的值，就用存储的值
           if (this.$storage.getStorage(this.selectName) && this.isRemember) {
             this.selectData = this.$storage.getStorage(this.selectName)
-            this.$emit('input', this.selectData);
           }
+          this.$emit('input', this.selectData);
         }
       }
     }

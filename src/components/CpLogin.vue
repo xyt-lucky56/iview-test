@@ -1,62 +1,60 @@
 <template>
-  <div class="hello">
-    <Modal v-model="modal1" @on-ok="ok" @on-cancel="cancel">
-      <div class="login-text">登录</div>
-      <Tabs value="name1">
-        <TabPane label="管理员" name="name1">
-          <Form ref="formInline" :model="formInline" :rules="ruleInline" class="view-form">
-            <FormItem prop="user">
-              <Input type="text" v-model="formInline.user" placeholder="请输入账号">
-              </Input>
-            </FormItem>
-            <FormItem prop="password">
-              <Input type="password" v-model="formInline.password" placeholder="请输入密码">
-              </Input>
-            </FormItem>
-            <div class="movebox">
-              <div class="movego"></div>
-              <div class="txt" id="txt">按住滑块,拖动到最右边</div>
-              <div class="move moveBefore" v-move></div>
-            </div>
-            <div class="view-change">
-              <Checkbox label="记住密码">记住密码</Checkbox>
-              <div class="change-login-type" id="tel">手机验证码登录</div>
-              <a class="forget-pas">忘记密码?</a>
-            </div>
-          </Form>
-        </TabPane>
+  <Modal v-model="modal1" @on-ok="ok" @on-cancel="cancel" class="iview-clogin">
+    <div class="login-text">登录</div>
+    <Tabs value="name1">
+      <TabPane label="管理员" name="name1">
+        <Form ref="formInline" :model="formInline" :rules="ruleInline" class="view-form">
+          <FormItem prop="user">
+            <Input type="text" v-model="formInline.user" placeholder="请输入账号">
+            </Input>
+          </FormItem>
+          <FormItem prop="password">
+            <Input type="password" v-model="formInline.password" placeholder="请输入密码">
+            </Input>
+          </FormItem>
+          <div class="movebox">
+            <div class="movego"></div>
+            <div class="txt" id="txt">按住滑块,拖动到最右边</div>
+            <div class="move moveBefore" v-move></div>
+          </div>
+          <div class="view-change">
+            <Checkbox label="记住密码">记住密码</Checkbox>
+            <div class="change-login-type" id="tel">手机验证码登录</div>
+            <a class="forget-pas">忘记密码?</a>
+          </div>
+        </Form>
+      </TabPane>
 
-        <TabPane label="普通用户" name="name2">
-          <Form ref="formInline" :model="formInline" :rules="ruleInline" class="view-form">
-            <FormItem prop="user">
-              <Input type="text" v-model="formInline.user" placeholder="请输入账号">
-              </Input>
-            </FormItem>
-            <FormItem prop="password">
-              <Input type="password" v-model="formInline.password" placeholder="请输入密码">
-              </Input>
-            </FormItem>
-            <div class="movebox">
-              <div class="movego"></div>
-              <div class="txt" id="txt">按住滑块,拖动到最右边</div>
-              <div class="move moveBefore" v-move></div>
-            </div>
-            <div class="view-change">
-              <Checkbox label="记住密码">记住密码</Checkbox>
-              <div class="change-login-type" id="tel">手机验证码登录</div>
-              <a class="forget-pas">忘记密码?</a>
-            </div>
-            <FormItem>
-            </FormItem>
-          </Form>
-        </TabPane>
-      </Tabs>
+      <TabPane label="普通用户" name="name2">
+        <Form ref="formInline" :model="formInline" :rules="ruleInline" class="view-form">
+          <FormItem prop="user">
+            <Input type="text" v-model="formInline.user" placeholder="请输入账号">
+            </Input>
+          </FormItem>
+          <FormItem prop="password">
+            <Input type="password" v-model="formInline.password" placeholder="请输入密码">
+            </Input>
+          </FormItem>
+          <div class="movebox">
+            <div class="movego"></div>
+            <div class="txt" id="txt">按住滑块,拖动到最右边</div>
+            <div class="move moveBefore" v-move></div>
+          </div>
+          <div class="view-change">
+            <Checkbox label="记住密码">记住密码</Checkbox>
+            <div class="change-login-type" id="tel">手机验证码登录</div>
+            <a class="forget-pas">忘记密码?</a>
+          </div>
+          <FormItem>
+          </FormItem>
+        </Form>
+      </TabPane>
+    </Tabs>
 
-      <div slot="footer">
-        <Button type="primary" @click="handleSubmit('formInline')" class="btn-green">登录</Button>
-      </div>
-    </Modal>
-  </div>
+    <div slot="footer">
+      <Button type="primary" @click="handleSubmit('formInline')" class="btn-green">登录</Button>
+    </div>
+  </Modal>
 </template>
 
 <script>
@@ -108,21 +106,22 @@
       },
       // 登录
       handleSubmit(name) {
-        console.log('点击登录')
         this.$refs[name].validate((valid) => {
-          console.log(valid)
           if (valid) {
             let params = {
               mobile: this.formInline.user,
               passWord: this.formInline.password
             }
-            console.log(params)
             userLogin(params).then(res => {
-
+              if (res.data.code == 0) {
+                this.modal1 = false;
+                this.$Message.success('恭喜您，登录成功!');
+              } else {
+                this.$Message.error(res.data.msg)
+              }
             })
-            this.$Message.success('Success!');
           } else {
-            this.$Message.error('Fail!');
+            this.$Message.error('请填写完后再提交');
           }
         })
       }
@@ -164,21 +163,23 @@
     },
   }
 </script>
-<style>
-  .ivu-input {
-    width: 316px;
-    font-size: 14px;
-  }
+<style lang="less">
+  .iview-clogin {
+    .ivu-input {
+      width: 316px;
+      font-size: 14px;
+    }
 
-  .ivu-tabs-bar {
-    margin: 0 auto;
-    width: 316px;
-    border-bottom: 0;
-    margin-bottom: 20px;
-  }
+    .ivu-tabs-bar {
+      margin: 0 auto;
+      width: 316px;
+      border-bottom: 0;
+      margin-bottom: 20px;
+    }
 
-  .ivu-modal-footer {
-    text-align: center;
+    .ivu-modal-footer {
+      text-align: center;
+    }
   }
 </style>
 
