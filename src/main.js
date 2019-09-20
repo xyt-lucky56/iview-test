@@ -12,8 +12,9 @@ Vue.use(iView);
 
 Vue.config.productionTip = false
 import './mock/mock'
-// import { message } from '@/filter/common'
-// Vue.prototype.$message = message
+
+import storage from './utils/cookie'
+Vue.prototype.$storage= storage
 
 /* eslint-disable no-new */
 new Vue({
