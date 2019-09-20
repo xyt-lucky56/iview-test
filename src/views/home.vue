@@ -2,6 +2,10 @@
   <div class="layout">
     <Layout>
       <Sider ref="side1" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed">
+        <div class="iview-logo">
+          <img src="../assets/images/banner1.png">
+          <h6>ivews</h6>
+        </div>
         <Menu active-name="1-2" theme="dark" width="auto" :open-names="['1']" @on-select="routeTo">
           <Submenu name="1">
             <template slot="title">
@@ -30,12 +34,12 @@
             <MenuItem name="/admin/formListTwo">表单2</MenuItem>
           </Submenu>
           <MenuItem name="/admin/jump">
-            <Icon type="ios-analytics"></Icon>
-            <span>锚点连接</span>
+          <Icon type="ios-analytics"></Icon>
+          <span>锚点连接</span>
           </MenuItem>
           <MenuItem name="/admin/uploadImg">
-            <Icon type="ios-analytics"></Icon>
-            <span>上传图片</span>
+          <Icon type="ios-analytics"></Icon>
+          <span>上传图片</span>
           </MenuItem>
         </Menu>
       </Sider>
@@ -140,13 +144,30 @@
     height: 100%;
   }
 
+  .iview-logo {
+    text-align: center;
+
+    margin-top: 20px;
+
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
+    h6{
+      color:#fff;
+      font-size:18px;
+    }
+  }
+
   .ivu-layout.ivu-layout-has-sider {
     height: 100%;
   }
 
   .layout-header-bar {
-    background: #fff;
+    background: #464d5f;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    color: #fff;
   }
 
   .layout-logo-left {

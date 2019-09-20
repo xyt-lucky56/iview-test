@@ -28,7 +28,10 @@
       </FormItem>
       <FormItem label="性别" prop="gender">
         <cp-radio v-model="formValidate.gender" :dataList="radioList" :isRemember="true" radioName="saveGender" ref="radioDom"></cp-radio>
-       </FormItem>
+      </FormItem>
+      <FormItem label="出生日期" prop="birthday">
+        <DatePicker v-model="formValidate.birthday" type="date" placeholder="请输入出生日期" style="width: 200px"></DatePicker>
+      </FormItem>
       <FormItem label="爱好" prop="interest">
         <CheckboxGroup v-model="formValidate.interest">
           <Checkbox label="吃"></Checkbox>
@@ -66,7 +69,8 @@
           interest: [],
           date: '',
           time: '',
-          desc: ''
+          desc: '',
+          brithday: ''
         },
         cityList: [],
         radioList: [],
@@ -121,6 +125,12 @@
             required: true,
             type: 'string',
             message: '请选择时间',
+            trigger: 'change'
+          }],
+          birthday: [{
+            required: true,
+            message: '请选择出生时间',
+            type: 'date',
             trigger: 'change'
           }],
           desc: [{
