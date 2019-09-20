@@ -30,8 +30,12 @@
             <MenuItem name="/admin/formListTwo">表单2</MenuItem>
           </Submenu>
           <MenuItem name="/admin/jump">
-          <Icon type="ios-analytics"></Icon>
-          <span>锚点连接</span>
+            <Icon type="ios-analytics"></Icon>
+            <span>锚点连接</span>
+          </MenuItem>
+          <MenuItem name="/admin/uploadImg">
+            <Icon type="ios-analytics"></Icon>
+            <span>上传图片</span>
           </MenuItem>
         </Menu>
       </Sider>

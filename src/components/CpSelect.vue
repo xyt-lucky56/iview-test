@@ -1,18 +1,20 @@
 <template>
-  <Select v-model="selectData" filterable @on-change="changeSelect">
+  <Select v-model="selectData" filterable @on-change="changeSelect" :placeholder="placeholder">
     <Option v-for="item in dataList" :value="item.value" :key="item.value">{{ item.label }}</Option>
   </Select>
 </template>
 
 <script>
   export default {
-    props: ['value', 'dataList', 'isRemember', 'selectName'],
+    props: ['value', 'dataList', 'isRemember', 'selectName','placeholder'],
     data() {
       return {
         selectData: '',
       }
     },
-    created() {},
+    created() {
+
+    },
     methods: {
       //切换下拉框
       changeSelect() {
