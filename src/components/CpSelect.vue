@@ -6,22 +6,36 @@
 
 <script>
   export default {
-    props: ['value', 'dataList', 'isRemember'],
+    props: ['value', 'dataList', 'isRemember', 'selectName'],
     data() {
       return {
         selectData: '',
       }
     },
-    created() {
-
-    },
+    created() {},
     methods: {
-      //点击下拉框
+      //切换下拉框
       changeSelect() {
-        console.log(this.selectData)
         this.$emit('input', this.selectData);
         if (this.isRemember) {
-          console.log(this.$storage,999)
+          this.$storage.setStorage(this.selectName, this.selectData)
+        }
+      },
+      // 设置默认值或者存储的值,则调用此函数
+      setDefaults(data) {
+        if (data) {
+          //设置默认选中数据
+          for (let a = 0; a < data.length; a++) {
+            if (data[a].defaultSelect) {
+              this.selectData = data[a].value
+              this.$emit('input', this.selectData);
+            }
+          }
+          //如果有存储的值，就用存储的值
+          if (this.$storage.getStorage(this.selectName) && this.isRemember) {
+            this.selectData = this.$storage.getStorage(this.selectName)
+            this.$emit('input', this.selectData);
+          }
         }
       }
     }

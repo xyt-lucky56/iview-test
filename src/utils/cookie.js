@@ -14,7 +14,7 @@ export default {
   removeCookie: function(name) { //删除cookie
     Cookies.remove(name);
   },
-  setStorage: function(name) { //存储localStorage
+  setStorage: function(name,value) { //存储localStorage
     store.set(name, value)
   },
   getStorage: function(name) { // 取出localStorage
