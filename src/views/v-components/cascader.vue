@@ -1,6 +1,6 @@
 <template>
     <div>
-        <CpCascader></CpCascader>
+        <CpCascader  @listenToChildEvent='childeValue1' :arr='[2, 21000, 10001, 30001]'></CpCascader>
     </div>
 </template>
 
@@ -13,12 +13,17 @@ export default {
     },
     data() {
         return {
-
+            childeValue:[]
         };
     },
     created() {
 
     },
+    methods:{
+        childeValue1(value){
+            console.log(value,'父组件')
+        }
+    }
 };
 </script>
 
