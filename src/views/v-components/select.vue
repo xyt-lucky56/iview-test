@@ -1,11 +1,13 @@
 <template>
     <div>
-        select
+        <CpSelect @listenToChildEvent='ChildValue'></CpSelect>
     </div>
 </template>
 
 <script>
+import CpSelect from '@/components/CpSelect.vue'
 export default {
+    components:{CpSelect},
     props: {
 
     },
@@ -17,6 +19,11 @@ export default {
     created() {
 
     },
+    methods:{
+        ChildValue(value){
+            console.log(value)
+        }
+    }
 };
 </script>
 

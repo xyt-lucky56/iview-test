@@ -6,18 +6,19 @@ export const chinaList = [
         childrens: [{
             value: 10000,
             label: '北京市',
+            text: '北京市(bj)',
             childrens: [{
-                value: 10000,
+                value: 101,
                 label: '北京1街道',
                 text: '北京1街道(bj)'
             },
             {
-                value: 10000,
+                value: 102,
                 label: '北京2街道',
                 text: '北京1街道(bj)'
             },
             {
-                value: 10000,
+                value: 103,
                 label: '北京3街道',
                 text: '北京1街道(bj)'
             },
@@ -31,6 +32,7 @@ export const chinaList = [
         childrens: [{
             value: 21000,
             label: '武汉',
+            text: '武汉市(wh)',
             childrens: [{
                 value: 10000,
                 label: '江夏区',
@@ -50,6 +52,7 @@ export const chinaList = [
         {
             value: 22000,
             label: '仙桃',
+            text: '武汉市(xt)',
             childrens: [{
                 value: 10000,
                 label: '仙桃1'
@@ -72,6 +75,7 @@ export const chinaList = [
         childrens: [{
             value: 31000,
             label: '长沙1',
+            text: '长沙市(cs)',
             childrens: [{
                 value: 31000,
                 label: '张家界'
@@ -90,6 +94,7 @@ export const chinaList = [
         {
             value: 32000,
             label: '湘西',
+            text: '湘西市(xx)',
             childrens: [{
                 value: 31000,
                 label: '苗族'
