@@ -108,21 +108,22 @@
       },
       // 登录
       handleSubmit(name) {
-        console.log('点击登录')
         this.$refs[name].validate((valid) => {
-          console.log(valid)
           if (valid) {
             let params = {
               mobile: this.formInline.user,
               passWord: this.formInline.password
             }
-            console.log(params)
             userLogin(params).then(res => {
-
+              if (res.data.code == 0) {
+                this.modal1 = false;
+                this.$Message.success('恭喜您，登录成功!');
+              } else {
+                this.$Message.error(res.data.msg)
+              }
             })
-            this.$Message.success('Success!');
           } else {
-            this.$Message.error('Fail!');
+            this.$Message.error('请填写完后再提交');
           }
         })
       }

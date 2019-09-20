@@ -28,14 +28,13 @@
           for (let a = 0; a < data.length; a++) {
             if (data[a].defaultSelect) {
               this.selectData = data[a].value
-              this.$emit('input', this.selectData);
             }
           }
           //如果有存储的值，就用存储的值
           if (this.$storage.getStorage(this.selectName) && this.isRemember) {
             this.selectData = this.$storage.getStorage(this.selectName)
-            this.$emit('input', this.selectData);
           }
+          this.$emit('input', this.selectData);
         }
       }
     }
