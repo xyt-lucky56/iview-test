@@ -21,7 +21,7 @@ export default {
     },
     methods:{
         childeValue1(value){
-            console.log(value,'父组件')
+            console.log(value,'父组件');//123
         }
     }
 };
