@@ -60,7 +60,9 @@
 </template>
 
 <script>
-  import {userLogin} from'@/api/api'
+  import {
+    userLogin
+  } from '@/api/api'
   export default {
     name: 'HelloWorld',
     data() {
@@ -108,11 +110,13 @@
       handleSubmit(name) {
         console.log('点击登录')
         this.$refs[name].validate((valid) => {
+          console.log(valid)
           if (valid) {
             let params = {
               mobile: this.formInline.user,
               passWord: this.formInline.password
             }
+            console.log(params)
             userLogin(params).then(res => {
 
             })
