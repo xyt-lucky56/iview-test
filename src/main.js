@@ -6,6 +6,7 @@ import router from './router'
 import store from './store/index'
 import 'jquery'
 
+import '@/filter/filter.js'
 import iView from 'iview';
 import '../my-theme/index.less';
 Vue.use(iView);

@@ -37,4 +37,7 @@ Vue.filter('filterImg', function (value) {
     }
     return api + '/d/img/s/' + value
 })
+Vue.filter('MenWomen',function(value){
+    return value==1?'男':'女'
+})
 

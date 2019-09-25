@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <CpCascader  @listenToChildEvent='childeValue1' :arr='[2, 21000, 10001, 30001]'></CpCascader>
+    <div  class="iview-main">
+        <CpCascader  v-model='childeValue' cascaderName='cas' :isRemember='true'></CpCascader>
     </div>
 </template>
 
@@ -20,13 +20,18 @@ export default {
 
     },
     methods:{
-        childeValue1(value){
-            console.log(value,'父组件');//123
-        }
+
+    },
+    updated(){
+        console.log(this.childeValue,'父组件接收的数据')
     }
 };
 </script>
 
 <style scoped>
-
+  .iview-main {
+    margin: 0 auto;
+    margin-top: 100px;
+    text-align: center;
+  }
 </style>
