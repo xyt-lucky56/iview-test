@@ -4,7 +4,7 @@
   <div class="container">
         <div class="loginContainer">
           <div class="login_title">用户登录</div>
-          <div class="userName input"><span class="inputText">手机号</span> <input type="number"  placeholder="请输入注册手机号" v-model="userName" @blur="validateUserName"></div>
+          <div class="userName input"><span class="inputText">手机号</span><input type="number"  placeholder="请输入用户名、注册手机号或邮箱" v-model="userName" @blur="validateUserName"></div>
           <div class="error" v-if="!isUserName">{{userNameErrorInfo}}</div>
           <div class="password input"><span class="inputText">密码</span> <input type="password"  minlength="6" maxlength="10" placeholder="请输入登录密码" v-model="password" @blur="validatePassword"></div>
           <div class="error" v-if="!isPassword">{{passwordErrorInfo}}</div>
@@ -30,7 +30,7 @@ export default {
       userName: '',
       password: '',
       isUserName: true,
-      userNameErrorInfo: '请填写手机号',
+      userNameErrorInfo: '请填写用户名',
       passwordErrorInfo: '请填写密码',
       isPassword: true,
       formPath: '',
@@ -83,7 +83,7 @@ export default {
       this.$router.push("./index");
     },
     forgetPassword() {
-      this.$router.push({ path: './forgetPassword', query: { phone: this.userName } });
+      this.$router.push({ path: './resetPassword', query: { phone: this.userName } });
     },
     register() {
       this.$router.push("./register");

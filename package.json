@@ -21,7 +21,7 @@
     "moment": "^2.24.0",
     "storejs": "^1.0.25",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1",
+    "vue-router": "^3.0.7",
     "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {

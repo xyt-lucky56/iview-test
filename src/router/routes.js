@@ -2,13 +2,18 @@
 export const routesList = [
     {
         path: "*",
-        name: "login",
+        // name: "login",
         component: resolve => require(["@/views/login/login"], resolve),
     },
     {
         path: "/",
         name: "login",
         component: resolve => require(["@/views/login/login"], resolve),
+    },
+    {
+        path: "/resetPassword",
+        name: "resetPassword",
+        component: resolve => require(["@/views/login/resetPassword"], resolve),
     },
     {
         path: '/admin/role',
@@ -25,7 +30,7 @@ export const routesList = [
             component: resolve => require(["@/views/v-form/formList"], resolve),
         }, {
             path: '/admin/formListTwo',
-            name: 'formList',
+            name: 'formListTwo',
             component: resolve => require(["@/views/v-form/formListTwo"], resolve),
         },{
             path: '/admin/table',
@@ -65,11 +70,11 @@ export const routesList = [
             name: 'tableLazy',
             component: resolve => require(["@/views/v-table/tableLazy"], resolve),
         },
-        {
-            path: '/admin/login',
-            name: 'login',
-            component: resolve => require(["@/views/login/login"], resolve),
-        },
+        // {
+        //     path: '/admin/login',
+        //     name: 'login',
+        //     component: resolve => require(["@/views/login/login"], resolve),
+        // },
         {
             path: '/admin/tableTwo',
             name: 'tableTwo',
